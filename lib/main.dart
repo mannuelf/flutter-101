@@ -13,10 +13,13 @@ class RandomWords extends StatefulWidget {
   const RandomWords({Key? key}) : super(key: key);
 
   @override
-  State<RandomWords> createState() => _RandomWords();
+  State<RandomWords> createState() => _RandomWordsState();
 }
 
-class _RandomWords extends State<RandomWords> {
+class _RandomWordsState extends State<RandomWords> {
+  final _suggestions = <WordPair>[];
+  final _biggerFont = const TextStyle(fontSize: 18);
+
   final wordPair = WordPair.random();
   @override
   Widget build(BuildContext context) {
