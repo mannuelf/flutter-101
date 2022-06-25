@@ -9,21 +9,34 @@ void main() {
   runApp(const MyApp());
 }
 
+class RandomWords extends StatefulWidget {
+  const RandomWords({Key? key}) : super(key: key);
+
+  @override
+  State<RandomWords> createState() => _RandomWords();
+}
+
+class _RandomWords extends State<RandomWords> {
+  final wordPair = WordPair.random();
+  @override
+  Widget build(BuildContext context) {
+    return Text(wordPair.asPascalCase);
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-
     return MaterialApp(
       title: 'Sportsball',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('⚽️ Sportsball ⚽️'),
         ),
-        body: Center(
-          child: Text(wordPair.asPascalCase),
+        body: const Center(
+          child: RandomWords(),
         ),
       ),
     );
