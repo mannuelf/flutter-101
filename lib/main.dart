@@ -20,14 +20,14 @@ class RandomWords extends StatefulWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 18);
+  final _saved = <WordPair>{};
 
   final wordPair = WordPair.random();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(2.0),
       itemBuilder: (context, i) {
         if (i.isOdd) return const Divider();
 
@@ -36,8 +36,15 @@ class _RandomWordsState extends State<RandomWords> {
           _suggestions.addAll(generateWordPairs().take(10));
         }
 
+        final alreadySaved = _saved.contains(_suggestions[index]);
+
         return ListTile(
           title: Text(_suggestions[index].asPascalCase),
+          trailing: Icon(
+            alreadySaved ? Icons.favorite :Icons.favorite_border,
+            color: alreadySaved ? Colors.red : null,
+            semanticLabel: alreadySaved ? 'Remove from saved' : 'Save'
+          )
         );
       },
     );
@@ -50,10 +57,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'RandomWordGenerator',
+      title: 'Start Up Name Generator',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('RandomWordGenerator'),
+          title: const Text('Start Up Name Generator'),
         ),
         body: const Center(
           child: RandomWords(),
