@@ -1,6 +1,6 @@
-# my_app
+# Random word generator
 
-A new Flutter project.
+Following Codelab: [read codelab here](https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1#0)
 
 ## Getting Started
 
