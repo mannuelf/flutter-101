@@ -24,11 +24,34 @@ class _RandomWordsState extends State<RandomWords> {
 
   final wordPair = WordPair.random();
 
+  void _pushSaved() {
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (context) {
+      final tiles = _saved.map((pair) {
+        return ListTile(
+          title: Text(pair.asPascalCase),
+        );
+      });
+      final divided = tiles.isNotEmpty
+          ? ListTile.divideTiles(context: context, tiles: tiles).toList()
+          : <Widget>[];
+
+      return Scaffold(
+          appBar: AppBar(title: const Text('Saved Suggestions')),
+          body: ListView(children: divided));
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Start Up Name Generator'),
+        actions: [
+          IconButton(
+              onPressed: _pushSaved,
+              icon: const Icon(Icons.list),
+              tooltip: 'Saved Suggestions')
+        ],
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16.0),
